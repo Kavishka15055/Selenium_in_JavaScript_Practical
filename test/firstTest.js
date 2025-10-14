@@ -1,44 +1,18 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
-const edge = require('selenium-webdriver/edge');
+const { Builder, Browser, By, Key, until } = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
+const chromedriver = require('chromedriver');
 
-// Path to msedgedriver.exe (if using Edge)
-const service = new edge.ServiceBuilder('C:\\WebDriver\\msedgedriver.exe');
-
-async function testReactApp() {
-  let driver;
+;(async function example() {
+  const service = new chrome.ServiceBuilder(chromedriver.path);
+  let driver = await new Builder()
+    .forBrowser(Browser.CHROME)
+    .setChromeService(service)
+    .build();
   try {
-    // Use Edge browser
-    driver = await new Builder()
-      .forBrowser('MicrosoftEdge')
-      .setEdgeService(service)
-      .build();
-
-    // ✅ 1. Open your own React site
-    await driver.get('http://localhost:3000'); // change to your site URL
-
-    // ✅ 2. Wait until a React element appears (example: a button)
-    await driver.wait(until.elementLocated(By.css('button')), 10000);
-
-    // ✅ 3. Click a button
-    const button = await driver.findElement(By.css('button'));
-    await button.click();
-
-    // ✅ 4. Read some text
-    const text = await driver.findElement(By.css('h1')).getText();
-    console.log('Page heading:', text);
-
-    // ✅ 5. Assert something (manual check)
-    if (text.includes('Welcome')) {
-      console.log('✅ Test passed!');
-    } else {
-      console.log('❌ Test failed!');
-    }
-
-  } catch (error) {
-    console.error('Error during test:', error);
+    await driver.get('https://www.google.com/ncr')
+    await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN)
+    await driver.wait(until.titleIs('webdriver - Google Search'), 30000) // Increased timeout to 10 seconds
   } finally {
-    await driver.quit();
+    await driver.quit()
   }
-}
-
-testReactApp();
+})()
