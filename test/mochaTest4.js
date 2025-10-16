@@ -30,9 +30,7 @@ describe("Selenium Waits Example", function () {
    //await driver.manage().setTimeouts({implicit:1000})
     // const ele = await driver.findElement(By.xpath('//*[@id="nav-xshop"]/ul/li[6]/div/a'))
     const ele = await driver.wait(
-      until.elementTextIs(driver.findElement(By.xpath("//a[text()='Mobiles']")),'Mobiles'),
-      10000
-    );
+      until.elementTextIs(driver.findElement(By.xpath("//a[text()='Mobiles']")),'Mobiles'),10000);
     // assert.ok(ele.isDisplayed())
   });
 

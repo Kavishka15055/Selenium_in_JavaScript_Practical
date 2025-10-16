@@ -36,7 +36,7 @@ const chromedriver = require("chromedriver");
     console.log("✅ Text Box test pass");
     await driver.sleep(2000);
 
-    await driver.actions().keyDown(Key.CONTROL).sendKeys('a').perform();
+    await driver.actions().keyDown(Key.BACK_SPACE).perform();
     await driver.sleep(2000);
     console.log("✅ Text Box select pass");
 
