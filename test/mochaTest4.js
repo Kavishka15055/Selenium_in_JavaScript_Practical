@@ -24,12 +24,16 @@ describe("Selenium Waits Example", function () {
     const ele = await driver.findElement(By.xpath('//*[@id="nav-xshop"]/ul/li[6]/div/a'))
     assert.ok(ele.isDisplayed())
   });
-  it("explicit waits", async function () {
+  it.only("explicit waits", async function () {
     
     await driver.get("https://www.amazon.in/");
    //await driver.manage().setTimeouts({implicit:1000})
-    const ele = await driver.findElement(By.xpath('//*[@id="nav-xshop"]/ul/li[6]/div/a'))
-    assert.ok(ele.isDisplayed())
+    // const ele = await driver.findElement(By.xpath('//*[@id="nav-xshop"]/ul/li[6]/div/a'))
+    const ele = await driver.wait(
+      until.elementTextIs(driver.findElement(By.xpath("//a[text()='Mobiles']")),'Mobiles'),
+      10000
+    );
+    // assert.ok(ele.isDisplayed())
   });
 
 
