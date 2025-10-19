@@ -4,6 +4,7 @@ const chromedriver = require("chromedriver");
 const { describe, it, beforeEach, afterEach } = require("mocha");
 const assert = require("assert");
 const path = require("path");
+const fs = require("fs");
 
 describe("Selenium File Upload & Window Handling Example", function () {
   this.timeout(60000); // Set test timeout to 60 seconds
@@ -62,6 +63,8 @@ describe("Selenium File Upload & Window Handling Example", function () {
     await driver.get('https://google.com');
      const ele = await driver.findElement(By.name('q'));
     await driver.executeScript("arguments[0].value='my name is kavishka';", ele);
+    const img=await driver.takeScreenshot();
+    fs.writeFileSync(process.cwd()+'/files/test.png',img,"base64");
     // await ele.sendKeys("laptop");
     await driver.sleep(2000);
   })
