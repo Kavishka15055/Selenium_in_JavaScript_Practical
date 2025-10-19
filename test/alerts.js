@@ -2,6 +2,8 @@ const { Builder, Browser, By, until } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const chromedriver = require("chromedriver");
 const { describe, it, beforeEach, afterEach } = require("mocha");
+const assert = require("assert");
+
 
 describe("Selenium Waits Example", function () {
   this.timeout(60000); // Set test timeout to 60 seconds
@@ -32,6 +34,14 @@ describe("Selenium Waits Example", function () {
     await driver.sleep(2000);
     await alert.accept();
     await driver.sleep(2000);
+  })
+
+  it.only('frames',async function(){
+    await driver.get("https://demoqa.com/frames");
+    await driver.switchTo().frame(await driver.findElement(By.id("frame1")));
+    // await driver.wait(until.ableToSwitchToFrame(By.id("frame1")),10000);
+    let text=await driver.findElement(By.id("sampleHeading")).getText();
+    assert.ok(text.toString()=='This is a sample page');
   })
 
 
