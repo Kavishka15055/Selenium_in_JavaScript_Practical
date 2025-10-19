@@ -38,10 +38,13 @@ describe("Selenium Waits Example", function () {
 
   it.only('frames',async function(){
     await driver.get("https://demoqa.com/frames");
-    await driver.switchTo().frame(await driver.findElement(By.id("frame1")));
-    // await driver.wait(until.ableToSwitchToFrame(By.id("frame1")),10000);
+    // await driver.switchTo().frame(await driver.findElement(By.id("frame1")));
+    await driver.wait(until.ableToSwitchToFrame(By.id("frame1")),10000);
     let text=await driver.findElement(By.id("sampleHeading")).getText();
     assert.ok(text.toString()=='This is a sample page');
+    await driver.switchTo().frame(null);
+    await driver.findElement(By.xpath("//div[text()='Elements']")).click();
+    await driver.sleep(2000);
   })
 
 
