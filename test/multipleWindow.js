@@ -21,7 +21,7 @@ describe("Selenium File Upload & Window Handling Example", function () {
     console.log("✅ Chrome driver setup complete.");
   });
 
-  it.only("Window switch and navigation test", async function () {
+  it("Window switch and navigation test", async function () {
     try {
       console.log("\n🧭 Navigating to Applitools Kitchen...");
       await driver.get("https://kitchen.applitools.com/ingredients/file-picker");
@@ -57,6 +57,14 @@ describe("Selenium File Upload & Window Handling Example", function () {
       throw err; // rethrow to let Mocha mark it as failed
     }
   });
+  it.only('execute script',async function(){
+    //inner text,click,set text
+    await driver.get('https://google.com');
+     const ele = await driver.findElement(By.name('q'));
+    await driver.executeScript("arguments[0].value='my name is kavishka';", ele);
+    // await ele.sendKeys("laptop");
+    await driver.sleep(2000);
+  })
 
   afterEach(async function () {
     console.log("\nCleaning up...");
