@@ -36,7 +36,7 @@ describe("Selenium Waits Example", function () {
     await driver.sleep(2000);
   })
 
-  it.only('frames',async function(){
+  it('frames1',async function(){
     await driver.get("https://demoqa.com/frames");
     // await driver.switchTo().frame(await driver.findElement(By.id("frame1")));
     await driver.wait(until.ableToSwitchToFrame(By.id("frame1")),10000);
@@ -44,6 +44,12 @@ describe("Selenium Waits Example", function () {
     assert.ok(text.toString()=='This is a sample page');
     await driver.switchTo().frame(null);
     await driver.findElement(By.xpath("//div[text()='Elements']")).click();
+    await driver.sleep(2000);
+  })
+  it.only('frames2',async function(){
+    await driver.get("https://kitchen.applitools.com/ingredients/iframe");
+    await driver.switchTo().frame(1);
+    await driver.findElement(By.css("button[aria-label='play']")).click();
     await driver.sleep(2000);
   })
 
